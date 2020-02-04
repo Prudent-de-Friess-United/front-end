@@ -6,13 +6,16 @@ export const initialState = {
 	}
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case 'LOGINFETCH':
 			return {
 				...state,
-				loginLoading: true,
-				loginSuccess: false
+				login: {
+					...state,
+					loginLoading: true,
+					loginSuccess: false
+				}
 			};
 		case 'LOGINSUCCESS':
 			return {

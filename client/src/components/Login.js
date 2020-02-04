@@ -17,8 +17,11 @@ const Login = props => {
 	const [password, setPassword] = useState('');
 	const [department, setDepartment] = useState('');
 
+	//I need to but message from request into state
+
 	const handleSubmit = el => {
 		el.preventDefault();
+		dispatch({type: 'LOGINFETCH'});
 		axiosWithAuth()
 			.post('/auth/login', {
 				username: username,
@@ -32,12 +35,12 @@ const Login = props => {
 					localStorage.setItem('user_id', res.data.user_id);
 				}
 				console.log(res);
-				//dispatch({type: 'LOGINSUCCESS', payload: res.data});
+				dispatch({type: 'LOGINSUCCESS', payload: res.data});
 				return true;
 			})
 			.catch(error => {
 				console.log(error);
-				//dispatch({type: 'LOGINFAILURE', payload: error.response});
+				dispatch({type: 'LOGINFAILURE'});
 			});
 	};
 
