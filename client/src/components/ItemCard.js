@@ -29,25 +29,25 @@ const dummyItem = {
     user_id: 5
 }
 
-export default function ItemCard() {
+export default function ItemCard(props) {
     const [item, setItem] = useState(dummyItem);
     const classes = useStyles();
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {item.name}
+                    {props.item.name}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                    {item.description}                    
+                    Description: {props.item.description}                    
                 </Typography>
                 <Typography>
-                    {item.price}
+                    Price: ${props.item.price}
                 </Typography>
                 <Typography>
-                    {item.location}
+                    Country: {props.item.location}
                 </Typography>
-                    {item.category}
+                    Category: {props.item.category}
             </CardContent>
         </Card>
     )
