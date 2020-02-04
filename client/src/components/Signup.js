@@ -28,23 +28,27 @@ const countries = [
 	'Tanzania'
 ];
 
-// export function MultipleSelect() {
-//     const [personName, setPersonName] = React.useState([]);
+// export const REGISTRATION_START = 'REGISTRATION_START';
+// export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
+// export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE';
 
-//     const handleChange = event => {
-//         setPersonName(event.target.value);
-//     };
-//     const handleChangeMultiple = event => {
-//         const { options } = event.target;
-//         const value = [];
-//         for (let i = 0, l = options.length; i < 1; i += 1) {
-//             if (options[i].selected) {
-//                 value.push(options[i].value);
-//             }
-//         }
-//     }
-//     setPersonName(value);
-// }
+//from my action file RIP
+
+// console.log(addUser);
+// 	dispatch({type: REGISTRATION_START});
+// 	axiosWithAuth()
+// 		.post(`/auth/register`, addUser)
+// 		.then(res => {
+// 			console.log(res);
+// 			localStorage.setItem('token', res.data.token);
+// 			dispatch({type: REGISTRATION_SUCCESS, payload: res.data});
+// 			return true;
+// 		})
+// 		.catch(error => {
+// 			console.log(error.response);
+// 			dispatch({type: REGISTRATION_FAILURE, payload: error.response});
+// 		});
+// };
 
 function Signup() {
 	const [languageName, setLanguageName] = React.useState([]);
