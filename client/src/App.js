@@ -4,6 +4,7 @@ import Landing from "./components/Landing";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
+import Login from "./components/Login"
 import { Link } from "react-router-dom";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
             <Signup />          
           </Route>
           <Route path="/sign-in">
-            
+            <Login/>
           </Route>
           <Route path="/user-home">
             <Home /> 

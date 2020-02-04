@@ -83,10 +83,8 @@ function Signup(){
                                 <Checkbox checked={languageName.indexOf(language) > -1} />
                                 <ListItemText primary={language} />                                
                             </MenuItem>
-                        ))}
-                        
+                        ))}                        
                     </Select>
-
                 </FormControl>
                 <FormControl>
                     <InputLabel id="country">Country</InputLabel>
