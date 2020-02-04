@@ -6,9 +6,8 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 function Home() {
     const {appState, dispatch} = useContext(AppContext);
-    const {items, setItems} = useState([]);
-    
-    
+    const [items, setItems] = useState([]);
+        
     useEffect(() => {
         axiosWithAuth()
 	    .get('https://african-market-lambda.herokuapp.com/items/')
@@ -25,7 +24,7 @@ function Home() {
 	return (
 		<div>
 			<h1>Welcome to your Dashboard.</h1>
-                {[].map(item => {
+                {items.map(item => {
                     return <ItemCard key={item.id} item={item}/>
                 })}
 		</div>

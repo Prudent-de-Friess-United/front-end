@@ -12,6 +12,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import AppContext from '../contexts/AppContext';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const languages = [
 	'English',
@@ -55,8 +62,20 @@ const countries = [
 function Signup() {
 	const {appState, dispatch} = useContext(AppContext);
 	const [languageName, setLanguageName] = useState([]);
-	const [countryName, setCountryName] = useState([]);
+    const [countryName, setCountryName] = useState([]);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [department, setDepartment] = useState('buyer');
 
+    const handleUsernameChanges = event => {
+        setUsername(event.target.value);
+    };
+    const handlePasswordChanges = event => {
+        setPassword(event.target.value);
+    };
+    const handleDepartmentChange = event => {
+        setDepartment(event.target.value);
+    };
 	const handleChange = event => {
 		setLanguageName(event.target.value);
 	};
@@ -69,15 +88,46 @@ function Signup() {
 			}
 		}
 		setLanguageName(value);
-	};
+    };
+    
+    const handleSubmit = event => {
+        event.preventDefault();
+        dispatch({type: 'SIGNUP'})
+        axiosWithAuth()
+            .post('/auth/register', {
+                username: username,
+                password: password,
+                department: department
+            })
+            .then(res => {
+                console.log('Response', res)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
 	return (
-		<div>
-			<h1>Welcome to Sauti Africa!</h1>
-			<form className="signup">
-				<TextField id="username" label="Username" />
-				<TextField id="password" label="Password" />
-				{/* <FormControl>
-                    <InputLabel id="language">Language</InputLabel>
+		<Container>
+			<FormControl onSubmit={event => handleSubmit(event)}>
+                <TextField 
+                    id="username" 
+                    label="Username" 
+                    value={username}
+                    onChange={handleUsernameChanges}
+                />
+                <TextField 
+                    id="password" 
+                    label="Password"
+                    value={password}
+                    onChange={handlePasswordChanges}
+                />
+				<FormLabel component="legend">Account Type</FormLabel>
+                <RadioGroup aria-label='department' name='department' value={department} onChange={handleDepartmentChange}>
+                    <FormControlLabel value='buyer' control={<Radio />} label="Buyer" />
+                    <FormControlLabel value='seller' control={<Radio />} label="Seller" />
+                </RadioGroup>
+                    {/* <InputLabel id="language">Language</InputLabel>
                     <Select
                         id="language"
                         multiple
@@ -110,10 +160,9 @@ function Signup() {
                         ))}
                         
                     </Select> */}
-
-				{/* </FormControl> */}
-			</form>
-		</div>
+                <Button onClick={handleSubmit}>Submit</Button>
+            </FormControl>
+        </Container>
 	);
 }
 
