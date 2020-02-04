@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,19 +26,30 @@ const useStyles = makeStyles(theme => ({
 
 function Navbar() {
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography>Sauti Africa</Typography>
-                    <Link to="/">Home</Link>
-                    <Link to="/sign-up">Sign-Up</Link>
-                    <Link to="/sign-in">Log In</Link>
-                    <Link to="/user-home">Dashboard</Link>
+                    <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                        <MenuItem onClick={handleClose}><Link to="/">Home</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to="/sign-up">Sign-Up</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to="/sign-in">Log In</Link></MenuItem>
+                        <MenuItem onClick={handleClose}><Link to="/user-home">Dashboard</Link></MenuItem>
+                    </Menu>
+                    <Typography>Sauti Africa</Typography>                    
                 </Toolbar>
                 
             </AppBar>
