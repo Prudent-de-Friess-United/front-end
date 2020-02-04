@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -59,7 +60,7 @@ function Signup(){
         for (let i = 0, l = options.length; i < 1; i += 1) {
             if (options[i].selected) {
                 value.push(options[i].value);
-            }
+            } 
         }
         setLanguageName(value);
     }    
@@ -69,7 +70,7 @@ function Signup(){
             <form className='signup'>
                 <TextField id="username" label="Username"/>
                 <TextField id="password" label="Password"/>
-                <FormControl>
+                {/* <FormControl>
                     <InputLabel id="language">Language</InputLabel>
                     <Select
                         id="language"
@@ -102,9 +103,9 @@ function Signup(){
                             </MenuItem>
                         ))}
                         
-                    </Select>
+                    </Select> */}
 
-                </FormControl>
+                {/* </FormControl> */}
             </form>
         </div>
    )
