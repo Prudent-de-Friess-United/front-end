@@ -1,104 +1,107 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import AppContext from '../contexts/AppContext';
 import ItemCard from './ItemCard';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {Link, withRouter, Redirect} from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Container from '@material-ui/core/Container';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { FormControlLabel } from '@material-ui/core';
 
 const NewItem = () => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState('');
-	const [location, setLocation] = useState('');
+	const [itemLocation, setItemLocation] = useState('');
 	const [category, setCategory] = useState('');
 	const [url, setUrl] = useState('');
 	//will receive use id from global state
 
 	const {appState, dispatch} = useContext(AppContext);
-	// {
-	//     name: 'Shoes',
-	//     description: 'Running Shoes',
-	//     price: '456',
-	//     location: 'Congo',
-	//     category: 'Clothing',
-	//     URL: 'https://fake.url',
-	//     user_id: 5
-	// }
-	const handleNameChanges = el => {
-		switch (el.target.name) {
-			case '':
-				break;
-			case '':
-				break;
-			case '':
-				break;
-			default:
-				return;
-		}
-		setName(el.target.value);
+	
+	const handleNameChanges = event => {
+		setName(event.target.value);		
 	};
-	const handleAgeChanges = el => {
-		setAge(el.target.value);
+	const handleDescriptionChanges = event => {
+		setDescription(event.target.value);
 	};
-	const handleHeightChanges = el => {
-		setHeight(el.target.value);
+	const handlePriceChanges = event => {
+		setPrice(event.target.value);
+	};
+	const handleLocationChanges = event => {
+		setItemLocation(event.target.value);
+	};
+	const handleCategoryChanges = event => {
+		setCategory(event.target.value);
+	};
+	const handleUrlChanges = event => {
+		setUrl(event.target.value);
 	};
 
-	const handleSubmit = el => {
-		el.preventDefault();
-		console.log('Submitted Items', {
-			name: name,
-			age: age,
-			height: `${height} cm`,
-			id: Date.now()
-		});
-		const base_url = 'http://localhost:3333/smurfs';
-		axios
-			.post(base_url, {
+	const handleSubmit = event => {
+		event.preventDefault();		
+		axiosWithAuth()
+			.post('https://african-market-lambda.herokuapp.com/items/additem', {
 				name: name,
-				age: age,
-				height: `${height} cm`
+				description: description,
+				price: price,
+				location: itemLocation,
+				category: category,
+				URL: url,
+				user_id: 5
 			})
 			.then(res => {
 				console.log(res);
 				dispatch({type: 'UPDATE_STATE', payload: res.data});
 			})
-			.catch(err => console.log(err));
-		dispatch({
-			type: 'ADD_ITEM',
-			payload: {
-				//PAYLOAD GOES HERE
-			}
-		});
-		setName('');
-		setAge('');
-		setHeight('');
-		console.log(appState);
+			.catch(err => console.log(err));			
 	};
 
 	return (
 		<Container>
-			<form onSubmit={el => handleSubmit(el)}>
+			<FormControl onSubmit={event => handleSubmit(event)}>
 				<TextField
-					id="SmurfName"
-					label="Smurf Name"
-					variant="outlined"
+					id="itemName"
+					label="Item Name"					
 					value={name}
 					onChange={handleNameChanges}
 				/>
 				<TextField
-					id="SmurfAge"
-					label="Smurf Age"
-					variant="outlined"
-					value={age}
-					onChange={handleAgeChanges}
+					id="itemDescription"
+					label="Item Description"
+					value={description}
+					onChange={handleDescriptionChanges}
 				/>
 				<TextField
-					id="SmurfHeight"
-					label="Smurf Height in cm"
-					variant="outlined"
-					value={height}
-					onChange={handleHeightChanges}
+					id="itemPrice"
+					label="Item Price"
+					value={price}
+					onChange={handlePriceChanges}
+				/>
+				<TextField
+					id="itemLocation"
+					label="Item Location"
+					value={itemLocation}
+					onChange={handleLocationChanges}
+				/>
+				<TextField
+					id="itemCategory"
+					label="Item Category"
+					value={category}
+					onChange={handleCategoryChanges}
+				/>
+				<TextField
+					id="itemUrl"
+					label="Item URL"
+					value={url}
+					onChange={handleUrlChanges}
 				/>
 				<Button onClick={handleSubmit}>Submit</Button>
-			</form>
+			</FormControl>
 		</Container>
 	);
 };
