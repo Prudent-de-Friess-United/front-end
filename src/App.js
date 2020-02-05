@@ -32,15 +32,16 @@ function App() {
 					<Route path="/user-home">
 						<Home />
 					</Route>
+					{/* The routes below need to be private routes and only be displayed when the use is logged in */}
 					<Route path={`/user-home/add-item`}>
 						<Home />
 						<NewItem />
 					</Route>
-					<Route path='/user-home/item-list'>
+					<Route path="/user-home/item-list">
 						<Home />
 						<ItemList />
 					</Route>
-					<Route path='/user-home/my-items'>
+					<Route path="/user-home/my-items">
 						<Home />
 						<MyItems />
 					</Route>

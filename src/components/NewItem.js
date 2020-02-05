@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext} from 'react';
 import AppContext from '../contexts/AppContext';
 import ItemCard from './ItemCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
@@ -10,7 +10,7 @@ import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import { FormControlLabel } from '@material-ui/core';
+import {FormControlLabel} from '@material-ui/core';
 
 const NewItem = () => {
 	const [name, setName] = useState('');
@@ -22,9 +22,9 @@ const NewItem = () => {
 	//will receive use id from global state
 
 	const {appState, dispatch} = useContext(AppContext);
-	
+
 	const handleNameChanges = event => {
-		setName(event.target.value);		
+		setName(event.target.value);
 	};
 	const handleDescriptionChanges = event => {
 		setDescription(event.target.value);
@@ -43,7 +43,7 @@ const NewItem = () => {
 	};
 
 	const handleSubmit = event => {
-		event.preventDefault();		
+		event.preventDefault();
 		axiosWithAuth()
 			.post('https://african-market-lambda.herokuapp.com/items/additem', {
 				name: name,
@@ -52,13 +52,13 @@ const NewItem = () => {
 				location: itemLocation,
 				category: category,
 				URL: url,
-				user_id: 5
+				user_id: appState.login.user_id
 			})
 			.then(res => {
 				console.log(res);
 				dispatch({type: 'UPDATE_STATE', payload: res.data});
 			})
-			.catch(err => console.log(err));			
+			.catch(err => console.log(err));
 	};
 
 	return (
@@ -66,7 +66,7 @@ const NewItem = () => {
 			<FormControl onSubmit={event => handleSubmit(event)}>
 				<TextField
 					id="itemName"
-					label="Item Name"					
+					label="Item Name"
 					value={name}
 					onChange={handleNameChanges}
 				/>

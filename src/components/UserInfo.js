@@ -24,8 +24,8 @@ const UserInfo = props => {
 			})
 			.catch(err => {
 				console.log('The data was not returned', err);
-			})
-			.finally(console.log('Finally:', items));
+			});
+		// .finally(console.log('Finally:', items));
 	}, []);
 	return <> </>;
 };
