@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import {Typography} from '@material-ui/core';
 
 const Login = props => {
 	const {appState, dispatch} = useContext(AppContext);
@@ -36,6 +37,7 @@ const Login = props => {
 				// }
 				console.log(`login`, res);
 				dispatch({type: 'LOGINSUCCESS', payload: res.data});
+				console.log(`appState`, appState);
 				return true;
 			})
 			.catch(error => {
@@ -82,6 +84,9 @@ const Login = props => {
 				</Select> */}
 				<Button onClick={handleSubmit}>Submit</Button>
 			</FormControl>
+			<Container>
+				<p>{appState.login.message}</p>
+			</Container>
 		</Container>
 	);
 };

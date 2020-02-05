@@ -17,8 +17,6 @@ function App() {
 			<Router>
 				<Navbar />
 				<div className="App">
-					<h1>Hello world!</h1>
-
 					<Route exact path="/">
 						<Landing />
 					</Route>
@@ -27,7 +25,6 @@ function App() {
 					</Route>
 					<Route path="/sign-in">
 						<Login />
-						<p>I'm Working</p>
 					</Route>
 					<Route path="/user-home">
 						<Home />

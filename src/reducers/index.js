@@ -21,10 +21,13 @@ export const reducer = (state, action) => {
 		case 'LOGINSUCCESS':
 			return {
 				...state,
-				loginLoading: false,
-				loginSuccess: true,
-				user: action.payload.id,
-				message: action.payload.message
+				login: {
+					...state,
+					loginLoading: false,
+					loginSuccess: true,
+					user_id: action.payload.id,
+					message: action.payload.message
+				}
 			};
 		case 'LOGINFAILURE':
 			return {
