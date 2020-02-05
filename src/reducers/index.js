@@ -2,7 +2,8 @@ export const initialState = {
 	login: {
 		loginLoading: false,
 		loginSuccess: false,
-		user: ''
+		user_id: '',
+		message: ''
 	}
 };
 
@@ -22,14 +23,16 @@ export const reducer = (state, action) => {
 				...state,
 				loginLoading: false,
 				loginSuccess: true,
-				user: action.payload
+				user: action.payload.id,
+				message: action.payload.message
 			};
 		case 'LOGINFAILURE':
 			return {
 				...state,
 				loginLoading: false,
 				loginSuccess: false,
-				user: ''
+				user: '',
+				message: ''
 			};
 		default:
 			return state;

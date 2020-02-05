@@ -31,17 +31,18 @@ const Login = props => {
 			})
 			.then(res => {
 				localStorage.setItem('token', res.data.token);
-				if (res.data.user_id) {
-					localStorage.setItem('user_id', res.data.user_id);
-				}
-				console.log(res);
+				// if (res.data.user_id) {
+				// 	localStorage.setItem('user_id', res.data.user_id);
+				// }
+				console.log(`login`, res);
 				dispatch({type: 'LOGINSUCCESS', payload: res.data});
 				return true;
 			})
 			.catch(error => {
 				console.log(error);
 				dispatch({type: 'LOGINFAILURE'});
-			});
+			})
+			.finally(console.log(appState));
 	};
 
 	const handleUsernameChanges = el => {
