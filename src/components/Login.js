@@ -1,16 +1,11 @@
-import React, {useReducer, useState, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import AppContext from '../contexts/AppContext';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import {Link, withRouter, Redirect} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Container from '@material-ui/core/Container';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import {Typography} from '@material-ui/core';
-import {useForm} from 'react-hook-form';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Login = props => {
@@ -83,6 +78,7 @@ const Login = props => {
 
 	return (
 		<Container>
+			<Typography component="h2">Welcome to Africa Connected!</Typography>
 			<FormControl onSubmit={el => handleSubmit(el)}>
 				<TextField
 					id="username"

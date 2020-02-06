@@ -1,8 +1,5 @@
-import React, {useState, useEffect, useContext} from 'react';
-//import {Link, Router, Route, NavLink, Switch, useRouteMatch} from 'react-router-dom';
-import AppContext from '../contexts/AppContext';
+import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCard';
-import NewItem from './NewItem';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import TextField from '@material-ui/core/TextField';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -11,7 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 function ItemList() {
-	const {appState, dispatch} = useContext(AppContext);
+	//const {appState, dispatch} = useContext(AppContext);
 	const [items, setItems] = useState([]);
 	const [search, setSearch] = useState('');
 	const [searched, setSearched] = useState(false);
@@ -33,12 +30,12 @@ function ItemList() {
 
 	const handleSearchChanges = event => {
 		setSearch(event.target.value);
-		if (event.target.value === ''){
+		if (event.target.value === '') {
 			setSearched(false);
 		} else {
 			setSearched(true);
 		}
-	}
+	};
 
 	const handleTypeChange = event => {
 		setSearchType(event.target.value);
