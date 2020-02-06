@@ -2,6 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import AppContext from '../contexts/AppContext';
 import ItemCard from './ItemCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import NewItem from './NewItem';
+import {Typography} from '@material-ui/core';
 
 function MyItems() {
 	const {appState, dispatch} = useContext(AppContext);
@@ -24,7 +26,8 @@ function MyItems() {
 
 	return (
 		<div>
-			<h1>Welcome to your Dashboard.</h1>
+			<Typography>My Posted Items</Typography>
+			<NewItem />
 			{items.map(item => {
 				return <ItemCard key={item.id} item={item} />;
 			})}

@@ -10,8 +10,9 @@ import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import {FormControlLabel} from '@material-ui/core';
-
+import {FormControlLabel, Typography} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import AddIcon from '@material-ui/icons/Add';
 const NewItem = () => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
@@ -28,6 +29,7 @@ const NewItem = () => {
 	const [locValid, setLocValid] = useState(false);
 	const [catValid, setCatValid] = useState(false);
 	const [urlValid, setUrlValid] = useState(false);
+	const [show, setShow] = useState(false);
 
 	const {appState, dispatch} = useContext(AppContext);
 
@@ -172,61 +174,81 @@ const NewItem = () => {
 	};
 
 	return (
-		<Container>
-			<FormControl onSubmit={event => handleSubmit(event)}>
-				<TextField
-					id="itemName"
-					label="Item Name"
-					required
-					error={!nameValid}
-					value={name}
-					onChange={handleNameChanges}
-				/>
-				<TextField
-					id="itemDescription"
-					label="Item Description"
-					required
-					error={!descValid}
-					value={description}
-					onChange={handleDescriptionChanges}
-				/>
-				<TextField
-					id="itemPrice"
-					label="Item Price"
-					required
-					error={!priceValid}
-					value={price}
-					onChange={handlePriceChanges}
-				/>
-				<TextField
-					id="itemLocation"
-					label="Item Location"
-					required
-					error={!locValid}
-					value={itemLocation}
-					onChange={handleLocationChanges}
-				/>
-				<TextField
-					id="itemCategory"
-					label="Item Category"
-					required
-					error={!catValid}
-					value={category}
-					onChange={handleCategoryChanges}
-				/>
-				<TextField
-					id="itemUrl"
-					label="Item URL"
-					required
-					error={!urlValid}
-					value={url}
-					onChange={handleUrlChanges}
-				/>
-				<Button onClick={handleSubmit} disabled={valid ? false : true}>
-					Submit
+		<Card>
+			{show ? (
+				<FormControl onSubmit={event => handleSubmit(event)}>
+					<TextField
+						id="itemName"
+						label="Item Name"
+						required
+						error={!nameValid}
+						value={name}
+						onChange={handleNameChanges}
+					/>
+					<TextField
+						id="itemDescription"
+						label="Item Description"
+						required
+						error={!descValid}
+						value={description}
+						onChange={handleDescriptionChanges}
+					/>
+					<TextField
+						id="itemPrice"
+						label="Item Price"
+						required
+						error={!priceValid}
+						value={price}
+						onChange={handlePriceChanges}
+					/>
+					<TextField
+						id="itemLocation"
+						label="Item Location"
+						required
+						error={!locValid}
+						value={itemLocation}
+						onChange={handleLocationChanges}
+					/>
+					<TextField
+						id="itemCategory"
+						label="Item Category"
+						required
+						error={!catValid}
+						value={category}
+						onChange={handleCategoryChanges}
+					/>
+					<TextField
+						id="itemUrl"
+						label="Item URL"
+						required
+						error={!urlValid}
+						value={url}
+						onChange={handleUrlChanges}
+					/>
+					<Button onClick={handleSubmit} disabled={valid ? false : true}>
+						Submit
+					</Button>
+					<Button
+						onClick={() => {
+							setShow(false);
+						}}
+					>
+						{' '}
+						Cancel
+					</Button>
+				</FormControl>
+			) : (
+				<Button
+					onClick={() => {
+						setShow(true);
+					}}
+				>
+					{' '}
+					<AddIcon />
+					<Typography>New Item</Typography>
 				</Button>
-			</FormControl>
-		</Container>
+			)}
+		</Card>
 	);
 };
 
