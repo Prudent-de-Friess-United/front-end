@@ -14,8 +14,8 @@ const Login = props => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	
-	const [userValid, setUserValid] = useState(false);
-	const [passValid, setPassValid] = useState(false);
+	const [userValid, setUserValid] = useState(true);
+	const [passValid, setPassValid] = useState(true);
 	const [valid, setValid] = useState(false);
 
 	//I need to but message from request into state
@@ -49,7 +49,7 @@ const Login = props => {
 
 	const handleUsernameChanges = el => {
 		setUsername(el.target.value);
-		if (el.target.value.length > 1) {
+		if (el.target.value.length > 2) {
 			setUserValid(true);
 			if (userValid && passValid) {
 				setValid(true);
@@ -83,6 +83,7 @@ const Login = props => {
 					error={!userValid}
 					value={username}
 					onChange={handleUsernameChanges}
+					helperText={(userValid ? "" : "Must be at least three characters long")}
 				/>
 				<TextField
 					id="password"
@@ -91,6 +92,7 @@ const Login = props => {
 					error={!passValid}
 					value={password}
 					onChange={handlePasswordChanges}
+					helperText={(passValid ? "" : "Must be at least six characters long")}
 				/>
 				{appState.login.loading ? (
 					<CircularProgress />

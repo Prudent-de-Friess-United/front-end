@@ -17,13 +17,13 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [department, setDepartment] = useState('buyer');
 
-	const [userValid, setUserValid] = useState(false);
-	const [passValid, setPassValid] = useState(false);
+	const [userValid, setUserValid] = useState(true);
+	const [passValid, setPassValid] = useState(true);
 	const [valid, setValid] = useState(false);
 
 	const handleUsernameChanges = event => {
 		setUsername(event.target.value);
-		if (event.target.value.length > 1) {
+		if (event.target.value.length > 2) {
 			setUserValid(true);
 			if (userValid && passValid) {
 				setValid(true);
@@ -76,6 +76,7 @@ function Signup() {
 					error={!userValid}
 					value={username}
 					onChange={handleUsernameChanges}
+					helperText={userValid ? '' : 'Must be at least three characters long'}
 				/>
 				<TextField
 					id="password"
@@ -84,6 +85,7 @@ function Signup() {
 					error={!passValid}
 					value={password}
 					onChange={handlePasswordChanges}
+					helperText={passValid ? '' : 'Must be at least six characters long'}
 				/>
 				<FormLabel component="legend">Account Type</FormLabel>
 				<RadioGroup
