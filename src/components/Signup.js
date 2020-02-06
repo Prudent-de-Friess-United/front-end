@@ -11,41 +11,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-// export const REGISTRATION_START = 'REGISTRATION_START';
-// export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
-// export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE';
-
-//from my action file RIP
-
-// console.log(addUser);
-// 	dispatch({type: REGISTRATION_START});
-// 	axiosWithAuth()
-// 		.post(`/auth/register`, addUser)
-// 		.then(res => {
-// 			console.log(res);
-// 			localStorage.setItem('token', res.data.token);
-// 			dispatch({type: REGISTRATION_SUCCESS, payload: res.data});
-// 			return true;
-// 		})
-// 		.catch(error => {
-// 			console.log(error.response);
-// 			dispatch({type: REGISTRATION_FAILURE, payload: error.response});
-// 		});
-// };
-
 function Signup() {
 	const {appState, dispatch} = useContext(AppContext);
 	const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [department, setDepartment] = useState('buyer');
 
-    const [userValid, setUserValid] = useState(false);
-	const [passValid, setPassValid] = useState(false);
+    const [userValid, setUserValid] = useState(true);
+	const [passValid, setPassValid] = useState(true);
 	const [valid, setValid] = useState(false);
 
     const handleUsernameChanges = event => {
         setUsername(event.target.value);
-        if (event.target.value.length > 1){
+        if (event.target.value.length > 2){
 			setUserValid(true);			
 			if (userValid && passValid){
 				setValid(true);
@@ -98,6 +76,7 @@ function Signup() {
                     error={!userValid}
                     value={username}
                     onChange={handleUsernameChanges}
+                    helperText={(userValid ? "" : "Must be at least three characters long")}
                 />
                 <TextField 
                     id="password" 
@@ -106,6 +85,7 @@ function Signup() {
                     error={!passValid}
                     value={password}
                     onChange={handlePasswordChanges}
+                    helperText={(passValid ? "" : "Must be at least six characters long")}
                 />
 				<FormLabel component="legend">Account Type</FormLabel>
                 <RadioGroup aria-label='department' name='department' value={department} onChange={handleDepartmentChange}>

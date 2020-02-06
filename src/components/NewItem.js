@@ -17,19 +17,19 @@ const NewItem = () => {
 	//will receive use id from global state
 
 	const [valid, setValid] = useState(false);
-	const [nameValid, setNameValid] = useState(false);
-	const [descValid, setDescValid] = useState(false);
-	const [priceValid, setPriceValid] = useState(false);
-	const [locValid, setLocValid] = useState(false);
-	const [catValid, setCatValid] = useState(false);
-	const [urlValid, setUrlValid] = useState(false);
+	const [nameValid, setNameValid] = useState(true);
+	const [descValid, setDescValid] = useState(true);
+	const [priceValid, setPriceValid] = useState(true);
+	const [locValid, setLocValid] = useState(true);
+	const [catValid, setCatValid] = useState(true);
+	const [urlValid, setUrlValid] = useState(true);
 	const [show, setShow] = useState(false);
 
 	const {appState, dispatch} = useContext(AppContext);
 
 	const handleNameChanges = event => {
 		setName(event.target.value);
-		if (event.target.value.length > 4) {
+		if (event.target.value.length > 2) {
 			setNameValid(true);
 			if (
 				nameValid &&
@@ -49,7 +49,7 @@ const NewItem = () => {
 	};
 	const handleDescriptionChanges = event => {
 		setDescription(event.target.value);
-		if (event.target.value.length > 10) {
+		if (event.target.value.length > 9) {
 			setDescValid(true);
 			if (
 				nameValid &&
@@ -89,7 +89,7 @@ const NewItem = () => {
 	};
 	const handleLocationChanges = event => {
 		setItemLocation(event.target.value);
-		if (event.target.value.length > 4) {
+		if (event.target.value.length > 3) {
 			setLocValid(true);
 			if (
 				nameValid &&
@@ -129,7 +129,7 @@ const NewItem = () => {
 	};
 	const handleUrlChanges = event => {
 		setUrl(event.target.value);
-		if (event.target.value.length > 4) {
+		if (event.target.value.length > 9) {
 			setUrlValid(true);
 			if (
 				nameValid &&
@@ -178,6 +178,7 @@ const NewItem = () => {
 						error={!nameValid}
 						value={name}
 						onChange={handleNameChanges}
+						helperText={(nameValid ? "" : "Must be at least three characters long")}
 					/>
 					<TextField
 						id="itemDescription"
@@ -186,6 +187,7 @@ const NewItem = () => {
 						error={!descValid}
 						value={description}
 						onChange={handleDescriptionChanges}
+						helperText={(descValid ? "" : "Must be at least ten characters long")}
 					/>
 					<TextField
 						id="itemPrice"
@@ -194,6 +196,7 @@ const NewItem = () => {
 						error={!priceValid}
 						value={price}
 						onChange={handlePriceChanges}
+						helperText={(priceValid ? "" : "Must be greater than zero")}
 					/>
 					<TextField
 						id="itemLocation"
@@ -202,6 +205,7 @@ const NewItem = () => {
 						error={!locValid}
 						value={itemLocation}
 						onChange={handleLocationChanges}
+						helperText={(locValid ? "" : "Must be at least four characters long")}
 					/>
 					<TextField
 						id="itemCategory"
@@ -210,6 +214,7 @@ const NewItem = () => {
 						error={!catValid}
 						value={category}
 						onChange={handleCategoryChanges}
+						helperText={(catValid ? "" : "Must be at least three characters long")}
 					/>
 					<TextField
 						id="itemUrl"
@@ -218,6 +223,7 @@ const NewItem = () => {
 						error={!urlValid}
 						value={url}
 						onChange={handleUrlChanges}
+						helperText={(urlValid ? "" : "Must be at least ten characters long")}
 					/>
 					<Button onClick={handleSubmit} disabled={valid ? false : true}>
 						Submit
