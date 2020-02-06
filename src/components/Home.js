@@ -1,31 +1,11 @@
-import React, {useReducer, useState, useEffect, useContext} from 'react';
-import AppContext from '../contexts/AppContext';
-import ItemCard from './ItemCard';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import React, {useReducer, useContext} from 'react';
 
 function Home() {
-	// const {appState, dispatch} = useContext(AppContext);
-	// const [items, setItems] = useState([]);
-
-	// useEffect(() => {
-	//     axiosWithAuth()
-	//     .get('https://african-market-lambda.herokuapp.com/items/')
-	//     .then(res => {
-	//         console.log('Item List:', res.data);
-	//         setItems(res.data);
-	//     })
-	//     .catch(err => {
-	//         console.log('The data was not returned', err);
-	//     })
-	//     .finally(console.log("Finally:", items));
-	// }, [])
+	
 
 	return (
 		<div>
-			{/* <h1>Welcome to your Dashboard.</h1>
-                {items.map(item => {
-                    return <ItemCard key={item.id} item={item}/>
-                })} */}
+			
 		</div>
 	);
 }

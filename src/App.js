@@ -8,7 +8,6 @@ import Login from './components/Login';
 import NewItem from './components/NewItem';
 import ItemList from './components/ItemList';
 import MyItems from './components/MyItems';
-import {Link} from 'react-router-dom';
 
 import AppContext from './contexts/AppContext';
 import {reducer, initialState} from './reducers/index';

@@ -13,8 +13,7 @@ const Login = props => {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [department, setDepartment] = useState('');
-
+	
 	const [userValid, setUserValid] = useState(false);
 	const [passValid, setPassValid] = useState(false);
 	const [valid, setValid] = useState(false);
@@ -72,10 +71,7 @@ const Login = props => {
 			setValid(false);
 		}
 	};
-	const handleDepartmentChanges = el => {
-		setDepartment(el.target.value);
-	};
-
+	
 	return (
 		<Container>
 			<Typography component="h2">Welcome to Africa Connected!</Typography>
