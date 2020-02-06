@@ -1,31 +1,30 @@
-import React, {useState, useEffect, useContext} from 'react';
-//import {Link, Router, Route, NavLink, Switch, useRouteMatch} from 'react-router-dom';
-import AppContext from '../contexts/AppContext';
+import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCard';
-import NewItem from './NewItem';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import TextField from '@material-ui/core/TextField';
 
 function ItemList() {
-	const {appState, dispatch} = useContext(AppContext);
+	//const {appState, dispatch} = useContext(AppContext);
 	const [items, setItems] = useState([]);
 	const [search, setSearch] = useState('');
 	const [searched, setSearched] = useState(false);
 	const [results, setResults] = useState([]);
 
 	useEffect(() => {
-		const searchResults = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+		const searchResults = items.filter(item =>
+			item.name.toLowerCase().includes(search.toLowerCase())
+		);
 		setResults(searchResults);
-	}, [search])
+	}, [search]);
 
 	const handleSearchChanges = event => {
 		setSearch(event.target.value);
-		if (event.target.value === ''){
+		if (event.target.value === '') {
 			setSearched(false);
 		} else {
 			setSearched(true);
 		}
-	}
+	};
 
 	useEffect(() => {
 		axiosWithAuth()
@@ -43,7 +42,12 @@ function ItemList() {
 	return (
 		<div>
 			<h1>Welcome to your Dashboard.</h1>
-			<TextField id="search" label="Search" value={search} onChange={handleSearchChanges}></TextField>
+			<TextField
+				id="search"
+				label="Search"
+				value={search}
+				onChange={handleSearchChanges}
+			></TextField>
 			{(!searched ? items : results).map(item => {
 				// console.log(item);
 				return <ItemCard key={item.id} item={item} />;

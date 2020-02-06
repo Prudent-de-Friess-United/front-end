@@ -1,4 +1,4 @@
-import React, {useReducer, useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import AppContext from '../contexts/AppContext';
 import ItemList from '../components/ItemList';
 import {Container, Typography} from '@material-ui/core';

@@ -1,16 +1,10 @@
 import React, {useState, useContext} from 'react';
 import AppContext from '../contexts/AppContext';
-import ItemCard from './ItemCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import {Link, withRouter, Redirect} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Container from '@material-ui/core/Container';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import {FormControlLabel, Typography} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 const NewItem = () => {

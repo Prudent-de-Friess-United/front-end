@@ -4,21 +4,13 @@ import {makeStyles} from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-
-import {Link, withRouter, Redirect} from 'react-router-dom';
-
 //material ui
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Container from '@material-ui/core/Container';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import {FormControlLabel} from '@material-ui/core';
 
 const useStyles = makeStyles({
 	root: {
