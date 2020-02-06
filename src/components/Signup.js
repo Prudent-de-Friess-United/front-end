@@ -67,11 +67,33 @@ function Signup() {
     const [password, setPassword] = useState('');
     const [department, setDepartment] = useState('buyer');
 
+    const [userValid, setUserValid] = useState(false);
+	const [passValid, setPassValid] = useState(false);
+	const [valid, setValid] = useState(false);
+
     const handleUsernameChanges = event => {
         setUsername(event.target.value);
+        if (event.target.value.length > 1){
+			setUserValid(true);			
+			if (userValid && passValid){
+				setValid(true);
+			}
+		} else {
+			setUserValid(false);
+			setValid(false);
+		}	
     };
     const handlePasswordChanges = event => {
         setPassword(event.target.value);
+        if (event.target.value.length > 5){
+			setPassValid(true);
+			if (userValid && passValid){
+				setValid(true);
+			}
+		} else {
+			setPassValid(false);
+			setValid(false);
+		}
     };
     const handleDepartmentChange = event => {
         setDepartment(event.target.value);
@@ -112,13 +134,17 @@ function Signup() {
 			<FormControl onSubmit={event => handleSubmit(event)}>
                 <TextField 
                     id="username" 
-                    label="Username" 
+                    label="Username"
+                    required
+                    error={!userValid}
                     value={username}
                     onChange={handleUsernameChanges}
                 />
                 <TextField 
                     id="password" 
                     label="Password"
+                    required
+                    error={!passValid}
                     value={password}
                     onChange={handlePasswordChanges}
                 />
@@ -160,7 +186,7 @@ function Signup() {
                         ))}
                         
                     </Select> */}
-                <Button onClick={handleSubmit}>Submit</Button>
+                <Button onClick={handleSubmit} disabled={(valid?false:true)}>Submit</Button>
             </FormControl>
         </Container>
 	);

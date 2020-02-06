@@ -21,25 +21,93 @@ const NewItem = () => {
 	const [url, setUrl] = useState('');
 	//will receive use id from global state
 
+	const [valid, setValid] = useState(false);
+	const [nameValid, setNameValid] = useState(false);
+	const [descValid, setDescValid] = useState(false);
+	const [priceValid, setPriceValid] = useState(false);
+	const [locValid, setLocValid] = useState(false);
+	const [catValid, setCatValid] = useState(false);
+	const [urlValid, setUrlValid] = useState(false);
+
 	const {appState, dispatch} = useContext(AppContext);
 
 	const handleNameChanges = event => {
 		setName(event.target.value);
+		if (event.target.value.length > 4){
+			setNameValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setNameValid(false);
+			setValid(false);
+		}
 	};
 	const handleDescriptionChanges = event => {
 		setDescription(event.target.value);
+		if (event.target.value.length > 10){
+			setDescValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setDescValid(false);
+			setValid(false);
+		}
 	};
 	const handlePriceChanges = event => {
 		setPrice(event.target.value);
+		if (event.target.value>0){
+			setPriceValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setPriceValid(false);
+			setValid(false);
+		}
 	};
 	const handleLocationChanges = event => {
 		setItemLocation(event.target.value);
+		if (event.target.value.length > 4){
+			setLocValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setLocValid(false);
+			setValid(false);
+		}
 	};
 	const handleCategoryChanges = event => {
 		setCategory(event.target.value);
+		if (event.target.value.length > 4){
+			setCatValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setCatValid(false);
+			setValid(false);
+		}
 	};
 	const handleUrlChanges = event => {
 		setUrl(event.target.value);
+		if (event.target.value.length > 4){
+			setUrlValid(true);
+			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
+				setValid(true);	
+				console.log('valid: true')			
+			}
+		} else {
+			setUrlValid(false);
+			setValid(false);
+		}
 	};
 
 	const handleSubmit = event => {
@@ -67,40 +135,47 @@ const NewItem = () => {
 				<TextField
 					id="itemName"
 					label="Item Name"
+					required
 					value={name}
 					onChange={handleNameChanges}
 				/>
 				<TextField
 					id="itemDescription"
 					label="Item Description"
+					required
 					value={description}
 					onChange={handleDescriptionChanges}
 				/>
 				<TextField
 					id="itemPrice"
 					label="Item Price"
+					required
+					error={!priceValid}
 					value={price}
 					onChange={handlePriceChanges}
 				/>
 				<TextField
 					id="itemLocation"
 					label="Item Location"
+					required
 					value={itemLocation}
 					onChange={handleLocationChanges}
 				/>
 				<TextField
 					id="itemCategory"
 					label="Item Category"
+					required
 					value={category}
 					onChange={handleCategoryChanges}
 				/>
 				<TextField
 					id="itemUrl"
 					label="Item URL"
+					required
 					value={url}
 					onChange={handleUrlChanges}
 				/>
-				<Button onClick={handleSubmit}>Submit</Button>
+				<Button onClick={handleSubmit} disabled={(valid?false:true)}>Submit</Button>
 			</FormControl>
 		</Container>
 	);
