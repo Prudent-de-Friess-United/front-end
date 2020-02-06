@@ -74,8 +74,8 @@ const Login = props => {
 	
 	return (
 		<Container>
-			<Typography component="h2">Welcome to Africa Connected!</Typography>
-			<FormControl onSubmit={el => handleSubmit(el)}>
+			<Typography color="#white" component="h2">Welcome to Africa Connected!</Typography>
+			<FormControl color="white" onSubmit={el => handleSubmit(el)}>
 				<TextField
 					id="username"
 					label="username"
@@ -84,6 +84,7 @@ const Login = props => {
 					value={username}
 					onChange={handleUsernameChanges}
 					helperText={(userValid ? "" : "Must be at least three characters long")}
+					color="white"
 				/>
 				<TextField
 					id="password"
