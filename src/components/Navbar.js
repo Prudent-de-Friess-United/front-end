@@ -71,10 +71,18 @@ function Navbar() {
 							<Link to="/user-home">Dashboard</Link>
 						</MenuItem>
 					</Menu>
-					<Typography>Sauti Africa</Typography>
-					<Link to='/user-home/add-item'>Add Item</Link>
-					<Link to='/user-home/item-list'>Item List</Link>
-					<Link to='/user-home/my-items'>My Items</Link>
+					<Button
+						onClick={() => {
+							window.location.href =
+								'https://african-market-place-2.github.io/marketing/';
+						}}
+					>
+						{' '}
+						Africa Connected .{' '}
+					</Button>
+					<Link to="/user-home/add-item">Add Item</Link>
+					<Link to="/user-home/item-list">Item List</Link>
+					<Link to="/user-home/my-items">My Items</Link>
 				</Toolbar>
 			</AppBar>
 		</div>
