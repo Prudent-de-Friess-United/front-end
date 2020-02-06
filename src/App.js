@@ -20,8 +20,6 @@ function App() {
 			<Router>
 				<Navbar />
 				<div className="App">
-					<h1>Hello world!</h1>
-
 					<Route exact path="/">
 						<Landing />
 					</Route>
@@ -30,20 +28,20 @@ function App() {
 					</Route>
 					<Route path="/sign-in">
 						<Login />
-						<p>I'm Working</p>
 					</Route>
 					<Route path="/user-home">
 						<Home />
 					</Route>
+					{/* The routes below need to be private routes and only be displayed when the use is logged in */}
 					<Route path={`/user-home/add-item`}>
 						<Home />
 						<NewItem />
 					</Route>
-					<Route path='/user-home/item-list'>
+					<Route path="/user-home/item-list">
 						<Home />
 						<ItemList />
 					</Route>
-					<Route path='/user-home/my-items'>
+					<Route path="/user-home/my-items">
 						<Home />
 						<MyItems />
 					</Route>
