@@ -33,11 +33,18 @@ const NewItem = () => {
 
 	const handleNameChanges = event => {
 		setName(event.target.value);
-		if (event.target.value.length > 4){
+		if (event.target.value.length > 4) {
 			setNameValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setNameValid(false);
@@ -46,11 +53,18 @@ const NewItem = () => {
 	};
 	const handleDescriptionChanges = event => {
 		setDescription(event.target.value);
-		if (event.target.value.length > 10){
+		if (event.target.value.length > 10) {
 			setDescValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setDescValid(false);
@@ -59,11 +73,18 @@ const NewItem = () => {
 	};
 	const handlePriceChanges = event => {
 		setPrice(event.target.value);
-		if (event.target.value>0){
+		if (event.target.value > 0) {
 			setPriceValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setPriceValid(false);
@@ -72,11 +93,18 @@ const NewItem = () => {
 	};
 	const handleLocationChanges = event => {
 		setItemLocation(event.target.value);
-		if (event.target.value.length > 4){
+		if (event.target.value.length > 4) {
 			setLocValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setLocValid(false);
@@ -85,11 +113,18 @@ const NewItem = () => {
 	};
 	const handleCategoryChanges = event => {
 		setCategory(event.target.value);
-		if (event.target.value.length > 4){
+		if (event.target.value.length > 2) {
 			setCatValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setCatValid(false);
@@ -98,11 +133,18 @@ const NewItem = () => {
 	};
 	const handleUrlChanges = event => {
 		setUrl(event.target.value);
-		if (event.target.value.length > 4){
+		if (event.target.value.length > 4) {
 			setUrlValid(true);
-			if (nameValid && descValid && priceValid && locValid && catValid && urlValid) {
-				setValid(true);	
-				console.log('valid: true')			
+			if (
+				nameValid &&
+				descValid &&
+				priceValid &&
+				locValid &&
+				catValid &&
+				urlValid
+			) {
+				setValid(true);
+				console.log('valid: true');
 			}
 		} else {
 			setUrlValid(false);
@@ -168,7 +210,7 @@ const NewItem = () => {
 					id="itemCategory"
 					label="Item Category"
 					required
-					error={!catValid}					
+					error={!catValid}
 					value={category}
 					onChange={handleCategoryChanges}
 				/>
@@ -180,7 +222,9 @@ const NewItem = () => {
 					value={url}
 					onChange={handleUrlChanges}
 				/>
-				<Button onClick={handleSubmit} disabled={(valid?false:true)}>Submit</Button>
+				<Button onClick={handleSubmit} disabled={valid ? false : true}>
+					Submit
+				</Button>
 			</FormControl>
 		</Container>
 	);

@@ -1,16 +1,6 @@
-import React, {useReducer, useState, useEffect, useContext} from 'react';
-import {
-	Link,
-	Router,
-	Route,
-	NavLink,
-	Switch,
-	useRouteMatch
-} from 'react-router-dom';
+import React, {useState, useEffect, useContext} from 'react';
 import AppContext from '../contexts/AppContext';
 import ItemCard from './ItemCard';
-import NewItem from './NewItem';
-import Axios from 'axios';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 function MyItems() {
