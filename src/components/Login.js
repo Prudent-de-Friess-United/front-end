@@ -10,7 +10,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import {Typography} from '@material-ui/core';
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Login = props => {
 	const {appState, dispatch} = useContext(AppContext);
@@ -54,21 +55,21 @@ const Login = props => {
 
 	const handleUsernameChanges = el => {
 		setUsername(el.target.value);
-		if (el.target.value.length > 1){
-			setUserValid(true);			
-			if (userValid && passValid){
+		if (el.target.value.length > 1) {
+			setUserValid(true);
+			if (userValid && passValid) {
 				setValid(true);
 			}
 		} else {
 			setUserValid(false);
 			setValid(false);
-		}		
+		}
 	};
 	const handlePasswordChanges = el => {
 		setPassword(el.target.value);
-		if (el.target.value.length > 5){
+		if (el.target.value.length > 5) {
 			setPassValid(true);
-			if (userValid && passValid){
+			if (userValid && passValid) {
 				setValid(true);
 			}
 		} else {
@@ -88,7 +89,7 @@ const Login = props => {
 					label="username"
 					required
 					error={!userValid}
-					value={username}					
+					value={username}
 					onChange={handleUsernameChanges}
 				/>
 				<TextField
@@ -99,17 +100,13 @@ const Login = props => {
 					value={password}
 					onChange={handlePasswordChanges}
 				/>
-				{/* <InputLabel id="department"> Account Type </InputLabel> */}
-				{/* <Select
-					id="department"
-					multiple
-					value={department}
-					onChange={handleDepartmentChanges}
-				>
-					<MenuItem value={'buyer'}>Buyer</MenuItem>
-					<MenuItem value={'seller'}>Seller</MenuItem>
-				</Select> */}
-				<Button onClick={handleSubmit} disabled={(valid?false:true)}>Submit</Button>
+				{appState.login.loading ? (
+					<CircularProgress />
+				) : (
+					<Button onClick={handleSubmit} disabled={valid ? false : true}>
+						Submit
+					</Button>
+				)}
 			</FormControl>
 			<Container>
 				<p>{appState.login.message}</p>
@@ -119,37 +116,3 @@ const Login = props => {
 };
 
 export default Login;
-
-//ACTION MADDNESS
-// //LOGGIN
-// export const LOGINFETCH = 'LOGINFETCH';
-// export const LOGINSUCCESS = 'LOGINSUCCESS';
-// export const LOGINFAILURE = 'LOGINFAILURE';
-// //
-// // {
-// // 	"username" : "bob",
-// //     "password" : "password",
-// //     "department" : "seller"
-// // }
-
-// //type must be either buyer or seller
-// export const login = (username, password, department) => dispatch => {
-// 	dispatch({type: LOGINFETCH});
-// 	return axiosWithAuth()
-// 		.post('/auth/login', {
-// 			username: username,
-// 			password: password,
-// 			department: department
-// 		})
-// 		.then(res => {
-// 			localStorage.setItem('token', res.data.token);
-// 			if (res.data.user_id) {
-// 				localStorage.setItem('user_id', res.data.user_id);
-// 			}
-// 			dispatch({type: LOGINSUCCESS, payload: res.data});
-// 			return true;
-// 		})
-// 		.catch(error => {
-// 			dispatch({type: LOGINFAILURE, payload: error.response});
-// 		});
-// };
