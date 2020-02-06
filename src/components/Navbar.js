@@ -8,10 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Link from '@material-ui/core/Link';
 import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
 //import AppContext from '../contexts/AppContext';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -56,29 +54,52 @@ function Navbar() {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Menu
-						id="simple-menu"
-						anchorEl={anchorEl}
-						keepMounted
-						open={Boolean(anchorEl)}
-						onClose={handleClose}
-					>
-						<MenuItem onClick={handleClose}>
-							<Link color="secondary" to="/" component={RouterLink}>Home</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link color="secondary" to="/sign-up" component={RouterLink}>Sign-Up</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link color="secondary" to="/sign-in" component={RouterLink}>Log In</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link color="secondary" to="/user-home" component={RouterLink}>Dashboard</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link color="secondary" to="/user-home/my-items" component={RouterLink}>My Items</Link>
-						</MenuItem>
-					</Menu>
+					<Drawer open={Boolean(anchorEl)} onClose={handleClose}>
+						<Toolbar>
+							<IconButton
+								edge="start"
+								className={classes.menuButton}
+								color="inherit"
+								aria-label="menu"
+								aria-controls="simple-menu"
+								aria-haspopup="true"
+								onClick={handleClose}
+							>
+								<MenuIcon />
+							</IconButton>
+						</Toolbar>
+						<List>
+							<ListItem onClick={handleClose}>
+								<Link color="secondary" to="/" component={RouterLink}>
+									Home
+								</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link color="secondary" to="/sign-up" component={RouterLink}>
+									Sign-Up
+								</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link color="secondary" to="/sign-in" component={RouterLink}>
+									Log In
+								</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link color="secondary" to="/user-home" component={RouterLink}>
+									Dashboard
+								</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link
+									color="secondary"
+									to="/user-home/my-items"
+									component={RouterLink}
+								>
+									My Items
+								</Link>
+							</ListItem>
+						</List>
+					</Drawer>
 					<Button
 						onClick={() => {
 							window.location.href =
