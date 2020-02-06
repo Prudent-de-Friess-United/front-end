@@ -128,7 +128,7 @@ export default function ItemCard(props) {
 				<CardContent>
 					<Typography
 						className={classes.title}
-						color="textSecondary"
+						color="primary"
 						gutterBottom
 					>
 						{props.item.name}

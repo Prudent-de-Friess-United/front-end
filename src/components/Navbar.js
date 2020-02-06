@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 //import {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,8 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
 import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
 //import AppContext from '../contexts/AppContext';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -70,19 +70,33 @@ function Navbar() {
 						</Toolbar>
 						<List>
 							<ListItem onClick={handleClose}>
-								<Link to="/">Home</Link>
+								<Link color="secondary" to="/" component={RouterLink}>
+									Home
+								</Link>
 							</ListItem>
 							<ListItem onClick={handleClose}>
-								<Link to="/sign-up">Sign-Up</Link>
+								<Link color="secondary" to="/sign-up" component={RouterLink}>
+									Sign-Up
+								</Link>
 							</ListItem>
 							<ListItem onClick={handleClose}>
-								<Link to="/sign-in">Log In</Link>
+								<Link color="secondary" to="/sign-in" component={RouterLink}>
+									Log In
+								</Link>
 							</ListItem>
 							<ListItem onClick={handleClose}>
-								<Link to="/user-home">Dashboard</Link>
+								<Link color="secondary" to="/user-home" component={RouterLink}>
+									Dashboard
+								</Link>
 							</ListItem>
 							<ListItem onClick={handleClose}>
-								<Link to="/user-home/my-items">My Items</Link>
+								<Link
+									color="secondary"
+									to="/user-home/my-items"
+									component={RouterLink}
+								>
+									My Items
+								</Link>
 							</ListItem>
 						</List>
 					</Drawer>
