@@ -11,7 +11,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
+import ListItem from '@material-ui/core/ListItem';
 //import AppContext from '../contexts/AppContext';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -86,7 +89,7 @@ function Navbar() {
 						Africa Connected .{' '}
 					</Button>
 					{/* <Link to="/user-home/add-item">Add Item</Link> */}
-					{/* <Link to="/user-home/item-list">Item List</Link> */}					
+					{/* <Link to="/user-home/item-list">Item List</Link> */}
 				</Toolbar>
 			</AppBar>
 		</div>

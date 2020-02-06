@@ -74,8 +74,8 @@ const Login = props => {
 	
 	return (
 		<Container>
-			<Typography color="#white" component="h2">Welcome to Africa Connected!</Typography>
-			<FormControl color="white" onSubmit={el => handleSubmit(el)}>
+			<Typography component="h2">Welcome to Africa Connected!</Typography>
+			<FormControl onSubmit={el => handleSubmit(el)}>
 				<TextField
 					id="username"
 					label="username"
@@ -98,7 +98,7 @@ const Login = props => {
 				{appState.login.loading ? (
 					<CircularProgress />
 				) : (
-					<Button onClick={handleSubmit} disabled={valid ? false : true}>
+					<Button color="white" onClick={handleSubmit} disabled={valid ? false : true}>
 						Submit
 					</Button>
 				)}
