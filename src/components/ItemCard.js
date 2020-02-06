@@ -32,22 +32,12 @@ const useStyles = makeStyles({
 	}
 });
 
-const dummyItem = {
-	name: 'Shoes',
-	description: 'Running Shoes',
-	price: '456',
-	location: 'Congo',
-	category: 'Clothing',
-	URL: 'https://fake.url',
-	user_id: 5
-};
-
 export default function ItemCard(props) {
 	const {appState, dispatch} = useContext(AppContext);
-	const [item, setItem] = useState(dummyItem);
 	const [cardOwner, setCardOwner] = useState({});
 	const [editing, setEditing] = useState(false);
-	const [itemPending, setItemPending] = useState({});
+	const [itemPending, setItemPending] = useState(props.item);
+	const [itemDeleted, setItemDeleted] = useState(false);
 
 	const classes = useStyles();
 	useEffect(() => {
@@ -67,6 +57,19 @@ export default function ItemCard(props) {
 
 	const toggleEdit = () => {
 		editing ? setEditing(false) : setEditing(true);
+	};
+
+	const deleteItem = () => {
+		axiosWithAuth()
+			.delete(
+				`https://african-market-lambda.herokuapp.com/items/${props.item.id}`
+			)
+			.then(res => {
+				console.log('Item deleted', res);
+				setItemPending({});
+				setItemDeleted(true);
+			})
+			.catch(err => console.log(err));
 	};
 
 	//To edit the card
@@ -114,7 +117,7 @@ export default function ItemCard(props) {
 					name: itemPending.name,
 					description: itemPending.description,
 					price: itemPending.price,
-					location: itemPending.itemLocation,
+					location: itemPending.location,
 					category: itemPending.category,
 					URL: itemPending.url,
 					user_id: appState.login.user_id
@@ -122,79 +125,94 @@ export default function ItemCard(props) {
 			)
 			.then(res => {
 				console.log(res);
-				setItemPending({});
+				setEditing(false);
 			})
 			.catch(err => console.log(err));
 	};
 
 	return (
 		<Card className={classes.root} variant="outlined">
-			<CardContent>
+			{!itemDeleted ? (
+				<CardContent>
+					<Typography
+						className={classes.title}
+						color="textSecondary"
+						gutterBottom
+					>
+						{props.item.name}
+					</Typography>
+					<Typography variant="h5" component="h2">
+						Description: {itemPending.description}
+					</Typography>
+					<Typography>Price: ${itemPending.price}</Typography>
+					<Typography>Country: {itemPending.location}</Typography>
+					<Typography>Category: {itemPending.category}</Typography>
+					<Typography>Posted by: {cardOwner.username}</Typography>
+					{props.item.user_id == appState.login.user_id ? (
+						<Button onClick={() => toggleEdit()}>Edit Card</Button>
+					) : (
+						<p>User type: {cardOwner.department}</p>
+					)}
+					{editing ? (
+						<>
+							<Button onClick={() => deleteItem()}>Delete</Button>
+							<Container>
+								<FormControl onSubmit={event => handleSubmit(event)}>
+									<TextField
+										id="itemName"
+										label="Item Name"
+										value={itemPending.name}
+										onChange={handleChanges}
+									/>
+									<TextField
+										id="itemDescription"
+										label="Item Description"
+										value={itemPending.description}
+										onChange={handleChanges}
+									/>
+									<TextField
+										id="itemPrice"
+										label="Item Price"
+										value={itemPending.price}
+										onChange={handleChanges}
+									/>
+									<TextField
+										id="itemLocation"
+										label="Item Location"
+										value={itemPending.location}
+										onChange={handleChanges}
+									/>
+									<TextField
+										id="itemCategory"
+										label="Item Category"
+										value={itemPending.category}
+										onChange={handleChanges}
+									/>
+									<TextField
+										id="itemUrl"
+										label="Item URL"
+										value={itemPending.url}
+										onChange={itemPending.handleChanges}
+									/>
+									<Button onClick={handleSubmit}>Submit</Button>
+								</FormControl>
+							</Container>
+						</>
+					) : (
+						<></>
+					)}
+				</CardContent>
+			) : (
 				<Typography
 					className={classes.title}
 					color="textSecondary"
-					gutterBottom
+					variant="h5"
+					component="h2"
 				>
-					{props.item.name}
+					{' '}
+					Card Deleted{' '}
 				</Typography>
-				<Typography variant="h5" component="h2">
-					Description: {props.item.description}
-				</Typography>
-				<Typography>Price: ${props.item.price}</Typography>
-				<Typography>Country: {props.item.location}</Typography>
-				<Typography>Category: {props.item.category}</Typography>
-				<Typography>Posted by: {cardOwner.username}</Typography>
-				{props.item.user_id == appState.login.user_id ? (
-					<Button onClick={() => toggleEdit()}>Edit Card</Button>
-				) : (
-					<p>User type: {cardOwner.department}</p>
-				)}
-				{editing ? (
-					<Container>
-						<FormControl onSubmit={event => handleSubmit(event)}>
-							<TextField
-								id="itemName"
-								label="Item Name"
-								value={itemPending.name}
-								onChange={handleChanges}
-							/>
-							<TextField
-								id="itemDescription"
-								label="Item Description"
-								value={itemPending.description}
-								onChange={handleChanges}
-							/>
-							<TextField
-								id="itemPrice"
-								label="Item Price"
-								value={itemPending.price}
-								onChange={handleChanges}
-							/>
-							<TextField
-								id="itemLocation"
-								label="Item Location"
-								value={itemPending.itemLocation}
-								onChange={handleChanges}
-							/>
-							<TextField
-								id="itemCategory"
-								label="Item Category"
-								value={itemPending.category}
-								onChange={handleChanges}
-							/>
-							<TextField
-								id="itemUrl"
-								label="Item URL"
-								value={itemPending.url}
-								onChange={itemPending.handleChanges}
-							/>
-							<Button onClick={handleSubmit}>Submit</Button>
-						</FormControl>
-					</Container>
-				) : (
-					<></>
-				)}
-			</CardContent>
+			)}
 		</Card>
 	);
 }
