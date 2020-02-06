@@ -47,7 +47,7 @@ function App() {
 				</div>
 			</Router>
 		</AppContext.Provider>
-	);
+	); 
 }
 
 export default App;

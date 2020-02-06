@@ -56,7 +56,7 @@ function ItemList() {
 
 	return (
 		<div>
-			<h1>Welcome to your Dashboard.</h1>
+			<h1>Items for Sale:</h1>
 			<FormLabel component="legend">Search</FormLabel>
 			<RadioGroup aria-label="search" name="searchType" value={searchType} onChange={handleTypeChange}>
 				<FormControlLabel value='name' control={<Radio />} label="By Name" />

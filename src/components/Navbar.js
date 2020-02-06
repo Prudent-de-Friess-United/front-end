@@ -71,6 +71,9 @@ function Navbar() {
 						<MenuItem onClick={handleClose}>
 							<Link to="/user-home">Dashboard</Link>
 						</MenuItem>
+						<MenuItem onClick={handleClose}>
+							<Link to="/user-home/my-items">My Items</Link>
+						</MenuItem>
 					</Menu>
 					<Button
 						onClick={() => {
@@ -82,8 +85,7 @@ function Navbar() {
 						Africa Connected .{' '}
 					</Button>
 					{/* <Link to="/user-home/add-item">Add Item</Link> */}
-					{/* <Link to="/user-home/item-list">Item List</Link> */}
-					<Link to="/user-home/my-items">My Items</Link>
+					{/* <Link to="/user-home/item-list">Item List</Link> */}					
 				</Toolbar>
 			</AppBar>
 		</div>
