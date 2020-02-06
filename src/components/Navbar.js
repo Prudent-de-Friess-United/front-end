@@ -9,8 +9,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import ListItem from '@material-ui/core/ListItem';
 //import AppContext from '../contexts/AppContext';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -52,29 +54,38 @@ function Navbar() {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Menu
-						id="simple-menu"
-						anchorEl={anchorEl}
-						keepMounted
-						open={Boolean(anchorEl)}
-						onClose={handleClose}
-					>
-						<MenuItem onClick={handleClose}>
-							<Link to="/">Home</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link to="/sign-up">Sign-Up</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link to="/sign-in">Log In</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link to="/user-home">Dashboard</Link>
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Link to="/user-home/my-items">My Items</Link>
-						</MenuItem>
-					</Menu>
+					<Drawer open={Boolean(anchorEl)} onClose={handleClose}>
+						<Toolbar>
+							<IconButton
+								edge="start"
+								className={classes.menuButton}
+								color="inherit"
+								aria-label="menu"
+								aria-controls="simple-menu"
+								aria-haspopup="true"
+								onClick={handleClose}
+							>
+								<MenuIcon />
+							</IconButton>
+						</Toolbar>
+						<List>
+							<ListItem onClick={handleClose}>
+								<Link to="/">Home</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link to="/sign-up">Sign-Up</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link to="/sign-in">Log In</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link to="/user-home">Dashboard</Link>
+							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link to="/user-home/my-items">My Items</Link>
+							</ListItem>
+						</List>
+					</Drawer>
 					<Button
 						onClick={() => {
 							window.location.href =
@@ -85,7 +96,7 @@ function Navbar() {
 						Africa Connected .{' '}
 					</Button>
 					{/* <Link to="/user-home/add-item">Add Item</Link> */}
-					{/* <Link to="/user-home/item-list">Item List</Link> */}					
+					{/* <Link to="/user-home/item-list">Item List</Link> */}
 				</Toolbar>
 			</AppBar>
 		</div>
