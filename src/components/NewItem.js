@@ -136,6 +136,7 @@ const NewItem = () => {
 					id="itemName"
 					label="Item Name"
 					required
+					error={!nameValid}
 					value={name}
 					onChange={handleNameChanges}
 				/>
@@ -143,6 +144,7 @@ const NewItem = () => {
 					id="itemDescription"
 					label="Item Description"
 					required
+					error={!descValid}
 					value={description}
 					onChange={handleDescriptionChanges}
 				/>
@@ -158,6 +160,7 @@ const NewItem = () => {
 					id="itemLocation"
 					label="Item Location"
 					required
+					error={!locValid}
 					value={itemLocation}
 					onChange={handleLocationChanges}
 				/>
@@ -165,6 +168,7 @@ const NewItem = () => {
 					id="itemCategory"
 					label="Item Category"
 					required
+					error={!catValid}					
 					value={category}
 					onChange={handleCategoryChanges}
 				/>
@@ -172,6 +176,7 @@ const NewItem = () => {
 					id="itemUrl"
 					label="Item URL"
 					required
+					error={!urlValid}
 					value={url}
 					onChange={handleUrlChanges}
 				/>
