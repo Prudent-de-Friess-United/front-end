@@ -98,6 +98,15 @@ function Navbar() {
 									My Items
 								</Link>
 							</ListItem>
+							<ListItem onClick={handleClose}>
+								<Link
+									color="secondary"
+									to="/user-home/item-list"
+									component={RouterLink}
+								>
+									Item List
+								</Link>
+							</ListItem>
 						</List>
 					</Drawer>
 					<Button

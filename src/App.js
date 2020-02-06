@@ -20,16 +20,18 @@ function App() {
 				<Navbar />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.Success ? <HomeLogin /> : <Landing />}
+						{!appState.login.Success ? <HomeLogin /> : <Landing />
+						//Change route in Login to push history to Landing
+						}
 					</Route>
 					<Route path="/sign-up">
 						<Signup />
 					</Route>
 					<Route path="/sign-in">
-						<Login />
-					</Route>
-					<Route path="/user-home">
 						<HomeLogin />
+					</Route>
+					<Route exact path="/user-home">
+						<Landing />
 					</Route>
 					{/* The routes below need to be private routes and only be displayed when the use is logged in */}
 					<Route path={`/user-home/add-item`}>

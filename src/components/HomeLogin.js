@@ -13,8 +13,7 @@ function HomeLogin() {
 		}
 	};
 	const LoginWrapper = styled.div`
-		background-color: rgba(1, 1, 1, 0.5);
-		color: white;
+		background-color: rgba(255, 255, 255, 0.8);
 	`;
 
 	return (
