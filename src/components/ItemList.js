@@ -6,6 +6,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {InputAdornment} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
 function ItemList() {
 	//const {appState, dispatch} = useContext(AppContext);
@@ -16,17 +18,23 @@ function ItemList() {
 	const [searchType, setSearchType] = useState('name');
 
 	useEffect(() => {
-		if (searchType === 'name'){
-			const searchResults = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+		if (searchType === 'name') {
+			const searchResults = items.filter(item =>
+				item.name.toLowerCase().includes(search.toLowerCase())
+			);
 			setResults(searchResults);
 		} else if (searchType === 'category') {
-			const searchResults = items.filter(item => item.category.toLowerCase().includes(search.toLowerCase()))
+			const searchResults = items.filter(item =>
+				item.category.toLowerCase().includes(search.toLowerCase())
+			);
 			setResults(searchResults);
 		} else if (searchType === 'location') {
-			const searchResults = items.filter(item => item.location.toLowerCase().includes(search.toLowerCase()))
+			const searchResults = items.filter(item =>
+				item.location.toLowerCase().includes(search.toLowerCase())
+			);
 			setResults(searchResults);
 		}
-	}, [search])
+	}, [search]);
 
 	const handleSearchChanges = event => {
 		setSearch(event.target.value);
@@ -39,7 +47,7 @@ function ItemList() {
 
 	const handleTypeChange = event => {
 		setSearchType(event.target.value);
-	}
+	};
 
 	useEffect(() => {
 		axiosWithAuth()
@@ -58,12 +66,38 @@ function ItemList() {
 		<div>
 			<h1>Items for Sale:</h1>
 			<FormLabel component="legend">Search</FormLabel>
-			<RadioGroup aria-label="search" name="searchType" value={searchType} onChange={handleTypeChange}>
-				<FormControlLabel value='name' control={<Radio />} label="By Name" />
-				<FormControlLabel value='category' control={<Radio />} label="By Category" />
-				<FormControlLabel value='location' control={<Radio />} label="By Country" />
+			<RadioGroup
+				aria-label="search"
+				name="searchType"
+				value={searchType}
+				onChange={handleTypeChange}
+			>
+				<FormControlLabel value="name" control={<Radio />} label="By Name" />
+				<FormControlLabel
+					value="category"
+					control={<Radio />}
+					label="By Category"
+				/>
+				<FormControlLabel
+					value="location"
+					control={<Radio />}
+					label="By Country"
+				/>
 			</RadioGroup>
-			<TextField id="search" label="Search" value={search} onChange={handleSearchChanges}></TextField>
+			<TextField
+				id="search"
+				label="Search"
+				variant="outlined"
+				InputProps={{
+					endAdornment: (
+						<InputAdornment position="start">
+							<SearchIcon />
+						</InputAdornment>
+					)
+				}}
+				value={search}
+				onChange={handleSearchChanges}
+			></TextField>
 			{(!searched ? items : results).map(item => {
 				console.log(item);
 				return <ItemCard key={item.id} item={item} />;
