@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import {Typography} from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 
 const Login = props => {
 	const {appState, dispatch} = useContext(AppContext);
@@ -17,6 +18,10 @@ const Login = props => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [department, setDepartment] = useState('');
+
+	const [userValid, setUserValid] = useState(false);
+	const [passValid, setPassValid] = useState(false);
+	const [valid, setValid] = useState(false);
 
 	//I need to but message from request into state
 
@@ -49,9 +54,27 @@ const Login = props => {
 
 	const handleUsernameChanges = el => {
 		setUsername(el.target.value);
+		if (el.target.value.length > 1){
+			setUserValid(true);			
+			if (userValid && passValid){
+				setValid(true);
+			}
+		} else {
+			setUserValid(false);
+			setValid(false);
+		}		
 	};
 	const handlePasswordChanges = el => {
 		setPassword(el.target.value);
+		if (el.target.value.length > 5){
+			setPassValid(true);
+			if (userValid && passValid){
+				setValid(true);
+			}
+		} else {
+			setPassValid(false);
+			setValid(false);
+		}
 	};
 	const handleDepartmentChanges = el => {
 		setDepartment(el.target.value);
@@ -63,12 +86,16 @@ const Login = props => {
 				<TextField
 					id="username"
 					label="username"
-					value={username}
+					required
+					error={!userValid}
+					value={username}					
 					onChange={handleUsernameChanges}
 				/>
 				<TextField
 					id="password"
 					label="password"
+					required
+					error={!passValid}
 					value={password}
 					onChange={handlePasswordChanges}
 				/>
@@ -82,7 +109,7 @@ const Login = props => {
 					<MenuItem value={'buyer'}>Buyer</MenuItem>
 					<MenuItem value={'seller'}>Seller</MenuItem>
 				</Select> */}
-				<Button onClick={handleSubmit}>Submit</Button>
+				<Button onClick={handleSubmit} disabled={(valid?false:true)}>Submit</Button>
 			</FormControl>
 			<Container>
 				<p>{appState.login.message}</p>
