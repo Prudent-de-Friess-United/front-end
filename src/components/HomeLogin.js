@@ -5,7 +5,8 @@ import Login from './Login';
 //import {styled} from '@material-ui/core/styles';
 import styled from 'styled-components';
 
-function HomeLogin() {
+function HomeLogin(props) {
+	console.log('homelogin props', props);
 	const styles = {
 		Container: {
 			backgroundImage: `url(${Image})`,
@@ -19,7 +20,7 @@ function HomeLogin() {
 	return (
 		<Container style={styles.Container}>
 			<LoginWrapper>
-				<Login />
+				<Login history={props.history} />
 			</LoginWrapper>
 		</Container>
 	);

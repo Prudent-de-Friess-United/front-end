@@ -11,24 +11,25 @@ import MyItems from './components/MyItems';
 
 import AppContext from './contexts/AppContext';
 import {reducer, initialState} from './reducers/index';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 function App() {
 	const [appState, dispatch] = useReducer(reducer, initialState);
 	return (
 		<AppContext.Provider value={{appState, dispatch}}>
 			<Router>
-				<Navbar />
+				<Navbar login={appState.login.loginSuccess} />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.Success ? <HomeLogin /> : <Landing />
-						//Change route in Login to push history to Landing
-						}
+						{!appState.login.loginSuccess ? <HomeLogin history={history} /> : <Landing />}						
 					</Route>
 					<Route path="/sign-up">
 						<Signup />
 					</Route>
 					<Route path="/sign-in">
-						<HomeLogin />
+						{!appState.login.loginSuccess ? <HomeLogin /> : <Landing />}
 					</Route>
 					<Route exact path="/user-home">
 						<Landing />
