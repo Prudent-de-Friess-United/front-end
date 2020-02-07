@@ -26,7 +26,9 @@ function MyItems() {
 
 	return (
 		<div>
-			<Typography>My Posted Items</Typography>
+			<Typography variant="h5" component="h2">
+				My Posted Items:
+			</Typography>
 			<NewItem />
 			{items.map(item => {
 				return <ItemCard key={item.id} item={item} />;

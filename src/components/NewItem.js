@@ -147,9 +147,17 @@ const NewItem = () => {
 			setValid(false);
 		}
 	};
-
+	const resetForm = () => {
+		setName('');
+		setDescription('');
+		setPrice('');
+		setItemLocation('');
+		setCategory('');
+		setUrl('');
+	};
 	const handleSubmit = event => {
 		event.preventDefault();
+		dispatch({type: 'ADDITEM'});
 		axiosWithAuth()
 			.post('https://african-market-lambda.herokuapp.com/items/additem', {
 				name: name,
@@ -162,9 +170,13 @@ const NewItem = () => {
 			})
 			.then(res => {
 				console.log(res);
-				dispatch({type: 'UPDATE_STATE', payload: res.data});
+				dispatch({type: 'ADDITEMSUCCESS'});
+				setShow(false);
+				resetForm();
 			})
 			.catch(err => console.log(err));
+		//Not really needed just to touch state.
+		dispatch({type: 'RESET'});
 	};
 
 	return (
@@ -178,7 +190,9 @@ const NewItem = () => {
 						error={!nameValid}
 						value={name}
 						onChange={handleNameChanges}
-						helperText={(nameValid ? "" : "Must be at least three characters long")}
+						helperText={
+							nameValid ? '' : 'Must be at least three characters long'
+						}
 					/>
 					<TextField
 						id="itemDescription"
@@ -187,7 +201,7 @@ const NewItem = () => {
 						error={!descValid}
 						value={description}
 						onChange={handleDescriptionChanges}
-						helperText={(descValid ? "" : "Must be at least ten characters long")}
+						helperText={descValid ? '' : 'Must be at least ten characters long'}
 					/>
 					<TextField
 						id="itemPrice"
@@ -196,7 +210,7 @@ const NewItem = () => {
 						error={!priceValid}
 						value={price}
 						onChange={handlePriceChanges}
-						helperText={(priceValid ? "" : "Must be greater than zero")}
+						helperText={priceValid ? '' : 'Must be greater than zero'}
 					/>
 					<TextField
 						id="itemLocation"
@@ -205,7 +219,7 @@ const NewItem = () => {
 						error={!locValid}
 						value={itemLocation}
 						onChange={handleLocationChanges}
-						helperText={(locValid ? "" : "Must be at least four characters long")}
+						helperText={locValid ? '' : 'Must be at least four characters long'}
 					/>
 					<TextField
 						id="itemCategory"
@@ -214,7 +228,9 @@ const NewItem = () => {
 						error={!catValid}
 						value={category}
 						onChange={handleCategoryChanges}
-						helperText={(catValid ? "" : "Must be at least three characters long")}
+						helperText={
+							catValid ? '' : 'Must be at least three characters long'
+						}
 					/>
 					<TextField
 						id="itemUrl"
@@ -223,7 +239,7 @@ const NewItem = () => {
 						error={!urlValid}
 						value={url}
 						onChange={handleUrlChanges}
-						helperText={(urlValid ? "" : "Must be at least ten characters long")}
+						helperText={urlValid ? '' : 'Must be at least ten characters long'}
 					/>
 					<Button onClick={handleSubmit} disabled={valid ? false : true}>
 						Submit

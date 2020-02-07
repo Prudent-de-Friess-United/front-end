@@ -64,7 +64,9 @@ function ItemList() {
 
 	return (
 		<div>
-			<Typography component="h2">Items for Sale: </Typography>
+			<Typography variant="h5" component="h2">
+				Items for Sale:{' '}
+			</Typography>
 			<FormLabel component="legend">Search</FormLabel>
 			<RadioGroup
 				aria-label="search"

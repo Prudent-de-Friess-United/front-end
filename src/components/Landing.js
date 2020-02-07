@@ -17,7 +17,9 @@ function Landing() {
 	return (
 		<Container>
 			{appState.login.loginSuccess ? (
-				<Typography component="h2">{appState.login.message}</Typography>
+				<Typography variant="h5" component="h2">
+					{appState.login.message}
+				</Typography>
 			) : (
 				<Login />
 			) // <Typography>To post please login</Typography>
