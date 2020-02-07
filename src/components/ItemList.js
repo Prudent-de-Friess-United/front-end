@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import AppContext from '../contexts/AppContext';
 import ItemCard from './ItemCard';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +11,7 @@ import {InputAdornment, Typography} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 function ItemList() {
-	//const {appState, dispatch} = useContext(AppContext);
+	const {appState, dispatch} = useContext(AppContext);
 	const [items, setItems] = useState([]);
 	const [search, setSearch] = useState('');
 	const [searched, setSearched] = useState(false);
@@ -60,7 +61,7 @@ function ItemList() {
 				console.log('The data was not returned', err);
 			})
 			.finally(console.log('Finally:', items));
-	}, []);
+	}, [appState]);
 
 	return (
 		<div>
