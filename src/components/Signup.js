@@ -24,12 +24,12 @@ function Signup() {
 	const [valid, setValid] = useState(false);
 
 	//Styles
-	const styles = {
-		Container: {
-			backgroundImage: `url(${Image})`,
-			height: `100vh`
-		}
-	};	
+	// const styles = {
+	// 	Container: {
+	// 		backgroundImage: `url(${Image})`,
+	// 		height: `100vh`
+	// 	}
+	// };	
 
 	//Form handling
 	const handleUsernameChanges = event => {
@@ -78,9 +78,9 @@ function Signup() {
 	};
 
 	return (
-		<Container style={styles.Container}>
+		<Container >
 			
-			<Container style={{backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
+			<Container>
 				<FormControl onSubmit={event => handleSubmit(event)}>
 					<TextField
 						id="username"
