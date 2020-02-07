@@ -23,15 +23,13 @@ function App() {
 				<Navbar />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.Success ? <HomeLogin history={history} /> : <Landing />
-						//Change route in Login to push history to Landing
-						}
+						{!appState.login.loginSuccess ? <HomeLogin history={history} /> : <Landing />}						
 					</Route>
 					<Route path="/sign-up">
 						<Signup />
 					</Route>
 					<Route path="/sign-in">
-						<HomeLogin />
+						{!appState.login.loginSuccess ? <HomeLogin /> : <Landing />}
 					</Route>
 					<Route exact path="/user-home">
 						<Landing />

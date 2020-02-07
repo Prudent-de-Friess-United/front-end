@@ -13,7 +13,7 @@ const Login = props => {
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	
+
 	const [userValid, setUserValid] = useState(true);
 	const [passValid, setPassValid] = useState(true);
 	const [valid, setValid] = useState(false);
@@ -74,7 +74,7 @@ const Login = props => {
 			setValid(false);
 		}
 	};
-	
+
 	return (
 		<Container>
 			<Typography component="h2">Welcome to Africa Connected!</Typography>
@@ -86,7 +86,7 @@ const Login = props => {
 					error={!userValid}
 					value={username}
 					onChange={handleUsernameChanges}
-					helperText={(userValid ? "" : "Must be at least three characters long")}
+					helperText={userValid ? '' : 'Must be at least three characters long'}
 					color="white"
 				/>
 				<TextField
@@ -96,16 +96,28 @@ const Login = props => {
 					error={!passValid}
 					value={password}
 					onChange={handlePasswordChanges}
-					helperText={(passValid ? "" : "Must be at least six characters long")}
+					helperText={passValid ? '' : 'Must be at least six characters long'}
 				/>
 				{appState.login.loading ? (
 					<CircularProgress />
 				) : (
-					<Button color="white" onClick={handleSubmit} disabled={valid ? false : true}>
+					<Button
+						color="white"
+						onClick={handleSubmit}
+						disabled={valid ? false : true}
+					>
 						Submit
 					</Button>
 				)}
 			</FormControl>
+			<Button
+				onClick={() => {
+					props.history.push('/user-home');
+				}}
+			>
+				{' '}
+				Get me Outta Here
+			</Button>
 			<Container>
 				<p>{appState.login.message}</p>
 			</Container>
