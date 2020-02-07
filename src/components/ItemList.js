@@ -6,7 +6,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {InputAdornment} from '@material-ui/core';
+import {InputAdornment, Typography} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 function ItemList() {
@@ -64,7 +64,7 @@ function ItemList() {
 
 	return (
 		<div>
-			<h1>Items for Sale:</h1>
+			<Typography component="h2">Items for Sale: </Typography>
 			<FormLabel component="legend">Search</FormLabel>
 			<RadioGroup
 				aria-label="search"

@@ -11,7 +11,7 @@ import MyItems from './components/MyItems';
 
 import AppContext from './contexts/AppContext';
 import {reducer, initialState} from './reducers/index';
-import { createBrowserHistory } from 'history';
+import {createBrowserHistory} from 'history';
 
 const history = createBrowserHistory();
 
@@ -23,7 +23,11 @@ function App() {
 				<Navbar />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.loginSuccess ? <HomeLogin history={history} /> : <Landing />}						
+						{!appState.login.loginSuccess ? (
+							<HomeLogin history={history} />
+						) : (
+							<Landing />
+						)}
 					</Route>
 					<Route path="/sign-up">
 						<Signup />
@@ -35,9 +39,6 @@ function App() {
 						<Landing />
 					</Route>
 					{/* The routes below need to be private routes and only be displayed when the use is logged in */}
-					<Route path={`/user-home/add-item`}>
-						<NewItem />
-					</Route>
 					<Route path="/user-home/item-list">
 						<ItemList />
 					</Route>

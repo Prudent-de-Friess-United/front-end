@@ -38,9 +38,9 @@ const Login = props => {
 				console.log(`login`, res);
 				dispatch({type: 'LOGINSUCCESS', payload: res.data});
 				console.log(`appState`, appState);
-				setTimeout(function(){
+				setTimeout(function() {
 					props.history.push('/user-home');
-				}, 1000)
+				}, 1000);
 				return true;
 			})
 			.catch(error => {
@@ -110,14 +110,7 @@ const Login = props => {
 					</Button>
 				)}
 			</FormControl>
-			<Button
-				onClick={() => {
-					props.history.push('/user-home');
-				}}
-			>
-				{' '}
-				Get me Outta Here
-			</Button>
+
 			<Container>
 				<p>{appState.login.message}</p>
 			</Container>
