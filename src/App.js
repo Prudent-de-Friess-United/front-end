@@ -11,6 +11,9 @@ import MyItems from './components/MyItems';
 
 import AppContext from './contexts/AppContext';
 import {reducer, initialState} from './reducers/index';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 function App() {
 	const [appState, dispatch] = useReducer(reducer, initialState);
@@ -20,7 +23,7 @@ function App() {
 				<Navbar />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.Success ? <HomeLogin /> : <Landing />
+						{!appState.login.Success ? <HomeLogin history={history} /> : <Landing />
 						//Change route in Login to push history to Landing
 						}
 					</Route>
