@@ -14,7 +14,8 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
 	root: {
-		minWidth: 300
+		minWidth: 300,
+		maxWidth: 500  
 	},
 	title: {
 		fontSize: 16
