@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Navbar() {
+function Navbar(props) {
 	const classes = useStyles();
 	//const {appState, dispatch} = useContext(AppContext);
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -38,6 +38,10 @@ function Navbar() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const preventDefault = event => {
+		event.preventDefault();
+	}
 
 	return (
 		<div className={classes.root}>
@@ -84,24 +88,26 @@ function Navbar() {
 									Log In
 								</Link>
 							</ListItem>
-							<ListItem onClick={handleClose}>
-								<Link color="secondary" to="/user-home" component={RouterLink}>
+							<ListItem disabled={(props.login ? false : true)} onClick={(props.login ? handleClose: preventDefault)}>
+								<Link color="secondary" to="/user-home" onClick={(props.login ? handleClose: preventDefault)} component={RouterLink}>
 									Dashboard
 								</Link>
-							</ListItem>
-							<ListItem onClick={handleClose}>
+							</ListItem >
+							<ListItem disabled={(props.login ? false : true)} onClick={(props.login ? handleClose: preventDefault)}>
 								<Link
 									color="secondary"
 									to="/user-home/my-items"
+									onClick={(props.login ? handleClose: preventDefault)}
 									component={RouterLink}
 								>
 									My Items
 								</Link>
 							</ListItem>
-							<ListItem onClick={handleClose}>
+							<ListItem disabled={(props.login ? false : true)} onClick={(props.login ? handleClose: preventDefault)}>
 								<Link
 									color="secondary"
 									to="/user-home/item-list"
+									onClick={(props.login ? handleClose: preventDefault)}
 									component={RouterLink}
 								>
 									Item List

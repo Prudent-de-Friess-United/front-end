@@ -20,7 +20,7 @@ function App() {
 	return (
 		<AppContext.Provider value={{appState, dispatch}}>
 			<Router>
-				<Navbar />
+				<Navbar login={appState.login.loginSuccess} />
 				<div className="App">
 					<Route exact path="/">
 						{!appState.login.loginSuccess ? <HomeLogin history={history} /> : <Landing />}						

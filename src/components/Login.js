@@ -109,15 +109,7 @@ const Login = props => {
 						Submit
 					</Button>
 				)}
-			</FormControl>
-			<Button
-				onClick={() => {
-					props.history.push('/user-home');
-				}}
-			>
-				{' '}
-				Get me Outta Here
-			</Button>
+			</FormControl>			
 			<Container>
 				<p>{appState.login.message}</p>
 			</Container>
