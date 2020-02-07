@@ -38,10 +38,6 @@ const Login = props => {
 				console.log(`login`, res);
 				dispatch({type: 'LOGINSUCCESS', payload: res.data});
 				console.log(`appState`, appState);
-				setTimeout(function() {
-					props.history.push('/user-home');
-				}, 1000);
-				return true;
 			})
 			.catch(error => {
 				console.log(error);
@@ -110,7 +106,6 @@ const Login = props => {
 					</Button>
 				)}
 			</FormControl>
-
 			<Container>
 				<p>{appState.login.message}</p>
 			</Container>

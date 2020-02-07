@@ -8,7 +8,7 @@ import Login from './components/Login';
 import NewItem from './components/NewItem';
 import ItemList from './components/ItemList';
 import MyItems from './components/MyItems';
-
+import Container from '@material-ui/core/Container'
 import AppContext from './contexts/AppContext';
 import {reducer, initialState} from './reducers/index';
 import {createBrowserHistory} from 'history';
@@ -20,7 +20,7 @@ function App() {
 	return (
 		<AppContext.Provider value={{appState, dispatch}}>
 			<Router>
-				<Navbar />
+				<Navbar login={appState.login.loginSuccess} />
 				<div className="App">
 					<Route exact path="/">
 						{!appState.login.loginSuccess ? (
@@ -40,10 +40,14 @@ function App() {
 					</Route>
 					{/* The routes below need to be private routes and only be displayed when the use is logged in */}
 					<Route path="/user-home/item-list">
-						<ItemList />
+						<Container>
+							<ItemList />
+						</Container>
 					</Route>
 					<Route path="/user-home/my-items">
+					<Container>
 						<MyItems />
+					</Container>
 					</Route>
 				</div>
 			</Router>
