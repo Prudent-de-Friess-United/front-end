@@ -8,7 +8,8 @@ import {Typography} from '@material-ui/core';
 function MyItems() {
 	const {appState, dispatch} = useContext(AppContext);
 	const [items, setItems] = useState([]);
-	const userID = appState.login.user_id; //Needs to be updated with user id from app state
+	const [newCard, setNewCard] = useState(0);
+	const userID = appState.login.user_id; //Needs to be updated with user id from app state	
 
 	useEffect(() => {
 		console.log('PreAxios user id from state', userID);
@@ -22,14 +23,14 @@ function MyItems() {
 				console.log('The data was not returned', err);
 			})
 			.finally(console.log('Finally:', items));
-	}, []);
+	}, [newCard]);
 
 	return (
 		<div>
 			<Typography variant="h5" component="h2">
 				My Posted Items:
 			</Typography>
-			<NewItem />
+			<NewItem cardNum={newCard} addCard={setNewCard} />
 			{items.map(item => {
 				return <ItemCard key={item.id} item={item} />;
 			})}

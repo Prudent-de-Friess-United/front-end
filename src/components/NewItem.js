@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
-const NewItem = () => {
+const NewItem = (props) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState('');
@@ -173,6 +173,7 @@ const NewItem = () => {
 				dispatch({type: 'ADDITEMSUCCESS'});
 				setShow(false);
 				resetForm();
+				props.addCard(props.cardNum + 1);
 			})
 			.catch(err => console.log(err));
 		//Not really needed just to touch state.
