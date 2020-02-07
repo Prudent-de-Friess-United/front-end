@@ -10,7 +10,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import styled from 'styled-components';
 import Image from '../images/Home.jpg';
 
 function Signup() {
@@ -30,10 +29,7 @@ function Signup() {
 			backgroundImage: `url(${Image})`,
 			height: `100vh`
 		}
-	};
-	const Wrapper = styled.div`
-		background-color: rgba(255, 255, 255, 0.8);
-	`;
+	};	
 
 	//Form handling
 	const handleUsernameChanges = event => {
@@ -83,55 +79,54 @@ function Signup() {
 
 	return (
 		<Container style={styles.Container}>
-			<Wrapper>
-				<Container>
-					<FormControl onSubmit={event => handleSubmit(event)}>
-						<TextField
-							id="username"
-							label="Username"
-							required
-							error={!userValid}
-							value={username}
-							onChange={handleUsernameChanges}
-							helperText={
-								userValid ? '' : 'Must be at least three characters long'
-							}
-						/>
-						<TextField
-							id="password"
-							label="Password"
-							required
-							error={!passValid}
-							value={password}
-							onChange={handlePasswordChanges}
-							helperText={
-								passValid ? '' : 'Must be at least six characters long'
-							}
-						/>
-						<FormLabel component="legend">Account Type</FormLabel>
-						<RadioGroup
-							aria-label="department"
-							name="department"
-							value={department}
-							onChange={handleDepartmentChange}
-						>
-							<FormControlLabel
-								value="buyer"
-								control={<Radio />}
-								label="Buyer"
-							/>
-							<FormControlLabel
-								value="seller"
-								control={<Radio />}
-								label="Seller"
-							/>
-						</RadioGroup>
-						<Button onClick={handleSubmit} disabled={valid ? false : true}>
-							Submit
-						</Button>
-					</FormControl>
-				</Container>
-			</Wrapper>
+			
+			<Container style={{backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
+				<FormControl onSubmit={event => handleSubmit(event)}>
+					<TextField
+						id="username"
+						label="Username"
+						required
+						error={!userValid}
+						value={username}
+						onChange={handleUsernameChanges}
+						helperText={
+							userValid ? '' : 'Must be at least three characters long'
+						}
+					/>
+					<TextField
+						id="password"
+						label="Password"
+						required
+						error={!passValid}
+						value={password}
+						onChange={handlePasswordChanges}
+						helperText={
+							passValid ? '' : 'Must be at least six characters long'
+						}
+					/>
+					<FormLabel component="legend">Account Type</FormLabel>
+					<RadioGroup
+						aria-label="department"
+						name="department"
+						value={department}
+						onChange={handleDepartmentChange}
+					>
+					<FormControlLabel
+						value="buyer"
+						control={<Radio />}
+						label="Buyer"
+					/>
+					<FormControlLabel
+						value="seller"
+						control={<Radio />}
+						label="Seller"
+					/>
+					</RadioGroup>
+					<Button onClick={handleSubmit} disabled={valid ? false : true}>
+						Submit
+					</Button>
+				</FormControl>
+			</Container>			
 		</Container>
 	);
 }
