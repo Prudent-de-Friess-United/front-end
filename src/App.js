@@ -1,5 +1,5 @@
-import React, {useReducer} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React, { useReducer } from 'react';
+import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
 import Landing from './components/Landing';
 import Navbar from './components/Navbar';
 import Signup from './components/Signup';
@@ -10,24 +10,21 @@ import ItemList from './components/ItemList';
 import MyItems from './components/MyItems';
 import Container from '@material-ui/core/Container'
 import AppContext from './contexts/AppContext';
-import {reducer, initialState} from './reducers/index';
-import {createBrowserHistory} from 'history';
+import { reducer, initialState } from './reducers/index';
+// import { createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
+
+//const history = createBrowserHistory();
 
 function App() {
 	const [appState, dispatch] = useReducer(reducer, initialState);
 	return (
-		<AppContext.Provider value={{appState, dispatch}}>
+		<AppContext.Provider value={{ appState, dispatch }}>
 			<Router>
 				<Navbar login={appState.login.loginSuccess} />
 				<div className="App">
 					<Route exact path="/">
-						{!appState.login.loginSuccess ? (
-							<HomeLogin history={history} />
-						) : (
-							<Landing />
-						)}
+						<HomeLogin />
 					</Route>
 					<Route path="/sign-up">
 						<Signup />
@@ -45,9 +42,9 @@ function App() {
 						</Container>
 					</Route>
 					<Route path="/user-home/my-items">
-					<Container>
-						<MyItems />
-					</Container>
+						<Container>
+							<MyItems />
+						</Container>
 					</Route>
 				</div>
 			</Router>

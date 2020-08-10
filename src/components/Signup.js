@@ -1,5 +1,6 @@
 import React from 'react';
-import {useState, useContext} from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import AppContext from '../contexts/AppContext';
@@ -9,12 +10,12 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import Image from '../images/Home.jpg';
 
 function Signup() {
 	//State
-	const {appState, dispatch} = useContext(AppContext);
+	const { appState, dispatch } = useContext(AppContext);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [department, setDepartment] = useState('buyer');
@@ -30,7 +31,7 @@ function Signup() {
 	// 		height: `100vh`
 	// 	}
 	// };	
-
+	const history = useHistory();
 	//Form handling
 	const handleUsernameChanges = event => {
 		setUsername(event.target.value);
@@ -62,7 +63,7 @@ function Signup() {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		dispatch({type: 'SIGNUP'});
+		dispatch({ type: 'SIGNUP' });
 		axiosWithAuth()
 			.post('/auth/register', {
 				username: username,
@@ -71,6 +72,7 @@ function Signup() {
 			})
 			.then(res => {
 				console.log('Response', res);
+				history.push('/user-home')
 			})
 			.catch(error => {
 				console.log(error);
@@ -79,7 +81,7 @@ function Signup() {
 
 	return (
 		<Container >
-			
+
 			<Container>
 				<FormControl onSubmit={event => handleSubmit(event)}>
 					<TextField
@@ -111,22 +113,22 @@ function Signup() {
 						value={department}
 						onChange={handleDepartmentChange}
 					>
-					<FormControlLabel
-						value="buyer"
-						control={<Radio />}
-						label="Buyer"
-					/>
-					<FormControlLabel
-						value="seller"
-						control={<Radio />}
-						label="Seller"
-					/>
+						<FormControlLabel
+							value="buyer"
+							control={<Radio />}
+							label="Buyer"
+						/>
+						<FormControlLabel
+							value="seller"
+							control={<Radio />}
+							label="Seller"
+						/>
 					</RadioGroup>
 					<Button onClick={handleSubmit} disabled={valid ? false : true}>
 						Submit
 					</Button>
 				</FormControl>
-			</Container>			
+			</Container>
 		</Container>
 	);
 }

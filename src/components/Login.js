@@ -1,15 +1,16 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../contexts/AppContext';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Login = props => {
-	const {appState, dispatch} = useContext(AppContext);
+	const { appState, dispatch } = useContext(AppContext);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -19,10 +20,11 @@ const Login = props => {
 	const [valid, setValid] = useState(false);
 
 	//I need to but message from request into state
+	const history = useHistory();
 
 	const handleSubmit = el => {
 		el.preventDefault();
-		dispatch({type: 'LOGINFETCH'});
+		dispatch({ type: 'LOGINFETCH' });
 		axiosWithAuth()
 			.post('/auth/login', {
 				username: username,
@@ -36,14 +38,13 @@ const Login = props => {
 				// 	localStorage.setItem('user_id', res.data.user_id);
 				// }
 				console.log(`login`, res);
-				dispatch({type: 'LOGINSUCCESS', payload: res.data});
-				console.log(`appState`, appState);
+				dispatch({ type: 'LOGINSUCCESS', payload: res.data });
+				history.push('/user-home')
 			})
 			.catch(error => {
 				console.log(error);
-				dispatch({type: 'LOGINFAILURE'});
+				dispatch({ type: 'LOGINFAILURE' });
 			})
-			.finally(console.log(appState));
 	};
 
 	const handleUsernameChanges = el => {
@@ -97,14 +98,14 @@ const Login = props => {
 				{appState.login.loading ? (
 					<CircularProgress />
 				) : (
-					<Button
-						color="white"
-						onClick={handleSubmit}
-						disabled={valid ? false : true}
-					>
-						Submit
-					</Button>
-				)}
+						<Button
+							color="white"
+							onClick={handleSubmit}
+							disabled={valid ? false : true}
+						>
+							Submit
+						</Button>
+					)}
 			</FormControl>
 			<Container>
 				<p>{appState.login.message}</p>
